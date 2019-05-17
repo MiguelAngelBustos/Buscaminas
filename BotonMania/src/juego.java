@@ -13,12 +13,22 @@ public class juego {
 
 	}
 
-	public static void tablero() {
+	public static void tablero(char [][] m,int niv) {
+		System.out.println("");
+		System.out.println("");
+		for (int i = 0; i < m.length-1; i++) {
+			for (int j = 0; j < m[0].length-1; j++) {
 
+				System.out.print("|" + m[i][j] + "|");
+
+			}
+			System.out.println("");
+		}
 	}
+	
 
 	public static int niveles(int niv) {
-		int opc = 4;
+		int opc = 5;
 		int aux = 2;
 		String nlvl;
 		do {
