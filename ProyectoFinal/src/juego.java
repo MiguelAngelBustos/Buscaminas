@@ -29,8 +29,8 @@ public class juego {
 		}
 		for (i = 0; i < aux; i++) {
 
-			fil = (int) Math.random() * 7;
-			col = (int) Math.random() * 7;
+			fil = (int) (Math.random() * 7);
+			col = (int) (Math.random() * 7);
 
 			m[fil][col] = +1;
 			m[fil + 1][col] = +1;
