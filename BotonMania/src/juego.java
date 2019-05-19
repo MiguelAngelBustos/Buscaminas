@@ -5,7 +5,7 @@ public class juego {
 	protected static double punt = 0;
 	protected static int fil;
 	protected static int col;
-	//protected static int niv;
+	//protected static int niv;aaaaaaaa
 	protected static Scanner t = new Scanner(System.in);
 
 	juego() {
