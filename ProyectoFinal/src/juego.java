@@ -76,7 +76,7 @@ public class juego {
 		try {
 			System.out.println("¿Desea cambiar de nivel?");
 			System.out.println("1.-SI");
-			System.out.println("2.-NO");
+			System.out.println("2.-NO"); 
 			aux = t.nextInt();
 		} catch (Exception e) {
 			System.out.println("ERROR AL ELEGIR EL NIVEL");
