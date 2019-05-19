@@ -16,8 +16,8 @@ public class juego {
 	public static void tablero(char [][] m,int niv) {
 		System.out.println("");
 		System.out.println("");
-		for (int i = 0; i < m.length-1; i++) {
-			for (int j = 0; j < m[0].length-1; j++) {
+		for (int i = 1; i < m.length-1; i++) {
+			for (int j = 1; j < m[0].length-1; j++) {
 
 				System.out.print("|" + m[i][j] + "|");
 
