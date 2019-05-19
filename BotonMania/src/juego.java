@@ -5,7 +5,6 @@ public class juego {
 	protected static double punt = 0;
 	protected static int fil;
 	protected static int col;
-	protected static int[][] tab = new int[7][7];
 	//protected static int niv;
 	protected static Scanner t = new Scanner(System.in);
 
@@ -13,13 +12,13 @@ public class juego {
 
 	}
 
-	public static void tablero(char [][] m,int niv) {
+	public static void tablero(int [][] tab,int niv) {
 		System.out.println("");
 		System.out.println("");
-		for (int i = 0; i < m.length-1; i++) {
-			for (int j = 0; j < m[0].length-1; j++) {
+		for (int i = 0; i < tab.length-1; i++) {
+			for (int j = 0; j < tab[0].length-1; j++) {
 
-				System.out.print("|" + m[i][j] + "|");
+				System.out.print("|" + tab[i][j] + "|");
 
 			}
 			System.out.println("");
@@ -95,8 +94,107 @@ public class juego {
 		return niv;
 	}
 
-	public static void juegos() {
+	public static void juegos(int[][] tab) {
 
+		// CASILLA EN LA QUE GOLPEA
+		if (tab[fil][col] == 0) {
+			tab[fil][col] = 3;
+			// AQUI VA EL GOLP!!
+		} else {
+			if (tab[fil][col] == 1) {
+				tab[fil][col] = 0;
+			}
+			if (tab[fil][col] == 2) {
+				tab[fil][col] = 1;
+			}
+
+			if (tab[fil][col] == 3) {
+				tab[fil][col] = 2;
+			}
+		}
+		
+		//CASILLA LADO DERECHO
+		if (tab[fil][col+1] == 0) {
+			tab[fil][col+1] = 3;
+			
+		} else {
+			if (tab[fil][col+1] == 1) {
+				tab[fil][col+1] = 0;
+			}
+			if (tab[fil][col+1] == 2) {
+				tab[fil][col+1] = 1;
+			}
+
+			if (tab[fil][col+1] == 3) {
+				tab[fil][col+1] = 2;
+			}
+		}
+		
+		
+		//CASILLA LADO IZQUIERDO
+		if (tab[fil][col-1] == 0) {
+			tab[fil][col-1] = 3;
+			
+		} else {
+			if (tab[fil][col-1] == 1) {
+				tab[fil][col-1] = 0;
+			}
+			if (tab[fil][col-1] == 2) {
+				tab[fil][col-1] = 1;
+			}
+
+			if (tab[fil][col-1] == 3) {
+				tab[fil][col-1] = 2;
+			}
+		}
+		
+		//CASILLA ARRIBA
+		
+		if (tab[fil-1][col] == 0) {
+			tab[fil-1][col] = 3;
+			
+		} else {
+			if (tab[fil-1][col] == 1) {
+				tab[fil-1][col] = 0;
+			}
+			if (tab[fil-1][col] == 2) {
+				tab[fil-1][col] = 1;
+			}
+
+			if (tab[fil-1][col] == 3) {
+				tab[fil-1][col] = 2;
+			}
+		}
+		
+		
+		//CASILLA ABAJO
+		if (tab[fil+1][col] == 0) {
+			tab[fil+1][col] = 3;
+			
+		} else {
+			if (tab[fil+1][col] == 1) {
+				tab[fil+1][col] = 0;
+			}
+			if (tab[fil+1][col] == 2) {
+				tab[fil+1][col] = 1;
+			}
+
+			if (tab[fil+1][col] == 3) {
+				tab[fil+1][col] = 2;
+			}
+		}
+		
+		
+		
+		// COMPROBAR SI GANO
+		int i=0;
+		for(i=0;i<36;i++) {
+		
+			
+		}
+		
+		
+		
 	}
 
 	public static void puntuacion() {
