@@ -84,7 +84,7 @@ public class juego {
 		}while(aux!=1 || aux!=2);
 		
 		if (aux == 1) {
-			do {
+			do { 
 				try {
 					System.out.println("¿Que nivel desea?");
 					System.out.println("1.-NOVATO");
