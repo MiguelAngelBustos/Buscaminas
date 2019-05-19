@@ -8,7 +8,7 @@ public class juego {
 		protected static int[][] tab = new int[7][7];
 		//protected static int niv;
 		protected static Scanner t = new Scanner(System.in);
-
+ 
 		juego() {
 
 		}
@@ -104,6 +104,9 @@ public class juego {
 			
 			//si es la primera vez que se juega 
 			
+			/*if(contpartida==1){
+			 * calificacion=1
+			 * }*/
 			
 			//calculo de la puntuación de los niveles
 			if(niv==0){
