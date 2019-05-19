@@ -104,7 +104,7 @@ public class juego {
 			
 			//si es la primera vez que se juega 
 			
-			/*if(contpartida==1){
+			/*if(contpartidas==1){
 			 * calificacion=1
 			 * }*/
 			
@@ -146,8 +146,19 @@ public class juego {
 		
 		public static void mensaje(int niv) {
 			int punt;
-			int golp;
+			int golp = 0;
 			int aux;
+			
+			aux=niv*3;
+			
+			if(golp==aux){
+				System.out.println("Perfecto. Hecho en "+aux +golp+ "golpes");
+			}
+			else if(golp<aux){
+				System.out.println("Extraordinariamente bien. Hecho en " +golp+ "golpes");
+			}else{
+				System.out.println("Hecho en " +golp+ "golpes");
+			}
 		}
 	}
 
