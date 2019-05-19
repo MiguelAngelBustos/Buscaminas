@@ -8,7 +8,7 @@ public class juego {
 		protected static int[][] tab = new int[7][7];
 		//protected static int niv;
 		protected static Scanner t = new Scanner(System.in);
- 
+    
 		juego() {
 
 		}
