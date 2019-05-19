@@ -5,12 +5,11 @@ public class juego {
 	protected static double punt = 0;
 	protected static int fil;
 	protected static int col;
-	//protected static int niv;aaaaaaaa
+	protected static int contjugada=0,golp=0;
+	//protected static int niv;
 	protected static Scanner t = new Scanner(System.in);
 
-	juego() {
-
-	}
+	
 
 	public static void tablero(int [][] tab,int niv) {
 		System.out.println("");
@@ -94,12 +93,36 @@ public class juego {
 		return niv;
 	}
 
-	public static void juegos(int[][] tab) {
-
+	public static int juegos(int[][] tab, int niv) {		
+		
+		 Scanner t = new Scanner(System.in);
+		do {
+			contjugada++;
+		 do {
+		 fil=t.nextInt();
+		 col=t.nextInt();
+		 if(fil==0 && col==1) {
+			//RECOMENZAR
+ }
+		 if(fil==0 && col==2) {
+			 //NUEVO
+			 tablero(tab,niv);
+ }
+		 if(fil==0 && col==3) {
+			 //CALIFICACION
+			 puntuacion(contjugada,golp,niv);
+ }
+		 if(fil==0 && col==4) {
+			 //CAMBIAR NIVEL
+			 niveles(niv);
+ }
+		 
+		 }while(fil<-1 || col<-1);{	
+				 
 		// CASILLA EN LA QUE GOLPEA
 		if (tab[fil][col] == 0) {
 			tab[fil][col] = 3;
-			// AQUI VA EL GOLP!!
+			golp++;
 		} else {
 			if (tab[fil][col] == 1) {
 				tab[fil][col] = 0;
@@ -187,17 +210,32 @@ public class juego {
 		
 		
 		// COMPROBAR SI GANO
-		int i=0;
-		for(i=0;i<36;i++) {
+		int cont=0;
+		int i=0,j=0;
+		for(i=0;i<6;i++) {
 		
+			for(j=0;j<6;j++) {
+			if(tab[i][j]==0) {
+				cont++;
+				
+			}
+		}
+		if(cont==36) {
+			cont=0;
+			golp=0;
+			puntuacion(contjugada,golp,niv);			
+		}	
 			
 		}
-		
-		
+		 }
+		}while(fil!=0 || col!=-2); {
+			System.out.println("Gracias por jugar :D");
+		}
+		return golp;
 		
 	}
 
-	public static void puntuacion() {
+	public static void puntuacion(int contjugada, int contpuls,int niv) {
 
 	}
 
