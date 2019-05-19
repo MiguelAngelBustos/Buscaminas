@@ -12,43 +12,60 @@ public class juego {
 	juego() {
 
 	}
-
-	public static void tablero(int niv, char m[][]) {
+	public static void tablero(int niv, int tab[][]) {
 		int aux = 0, i = 0, j = 0;
 		aux = niv * 3;
+		System.out.println(aux);
 		int fil = 0;
 		int col = 0;
-		for (i = 1; i < m.length - 1; i++) { // FILA
+		for (i = 1; i < tab.length - 1; i++) { // FILA
 			System.out.print(" ");
-			for (j = 1; j < m[0].length - 1; j++) {
+			for (j = 1; j < tab[0].length - 1; j++) {
 				// COLUMNA
-				m[i][j] = '0';
-				System.out.print("|" + m[i][j] + "|");
+				tab[i][j] = 0;
+				System.out.print("|" + tab[i][j] + "|");
 			}
 			System.out.println();
 		}
-		for (i = 0; i < aux; i++) {
+		for (int z = 0; z < aux; z++) {
 
+			do {
 			fil = (int) (Math.random() * 7);
 			col = (int) (Math.random() * 7);
+			//System.out.println(fil);
+			//System.out.println(col);
+			}while(col==0 || fil == 0);
 
-			m[fil][col] = +1;
-			m[fil + 1][col] = +1;
-			m[fil][col + 1] = +1;
-			m[fil][col - 1] = +1;
-			m[fil - 1][col] = +1;
-
-			for (i = 1; i < m.length - 1; i++) { // FILA
-
-				for (j = 1; j < m[0].length - 1; j++) {
-					if (m[i][j] == 3) {
-						m[i][j] = 0;
+			tab[fil][col] =tab[fil][col] +1;
+			tab[fil + 1][col] = tab[fil + 1][col]+1;
+			tab[fil][col + 1] =tab[fil][col + 1] +1;
+			tab[fil][col - 1] =tab[fil][col - 1] +1;
+			tab[fil - 1][col] =tab[fil - 1][col] +1;
+			System.out.println();
+			
+			for (i = 1; i < tab.length - 1; i++) {
+				for (j = 1; j < tab[0].length - 1; j++) {
+					if (tab[i][j] == 4) {
+						tab[i][j] = 0;
 					}
 
 				}
 
 			}
+		
+
 		}
+		System.out.println();
+		
+		for (i = 1; i < tab.length - 1; i++) { // FILA
+			System.out.print(" ");
+			for (j = 1; j < tab[0].length - 1; j++) {
+				// COLUMNA
+				System.out.print("|" + tab[i][j] + "|");
+			}
+			System.out.println();
+		}
+
 	}
 
 	public static int niveles(int niv) {
