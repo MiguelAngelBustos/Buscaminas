@@ -6,69 +6,68 @@ public class juego {
 	protected static int fil;
 	protected static int col;
 	protected static int[][] tab = new int[7][7];
-	//protected static int niv;
+	// protected static int niv;
 	protected static Scanner t = new Scanner(System.in);
 
 	juego() {
 
 	}
+
 	public static int[][] tablero(int niv, int tab[][], boolean flag) {
 		int aux = 0, i = 0, j = 0;
 		aux = niv * 3;
-		//System.out.println(aux);
+		// System.out.println(aux);
 		int fil = 0;
 		int col = 0;
-		int m [][] = new int [8][8];
-		/*for (i = 1; i < tab.length - 1; i++) { // FILA
-			System.out.print(" ");
-			for (j = 1; j < tab[0].length - 1; j++) {
-				// COLUMNA
-				tab[i][j] = 0;
-				System.out.print("|" + tab[i][j] + "|");
-			}
-			System.out.println();
-		}*/
+		int m[][] = new int[8][8];
+
 		if (flag == false) {
-		for (int z = 0; z < aux; z++) {
-
-			do {
-			fil = (int) (Math.random() * 7);
-			col = (int) (Math.random() * 7);
-			//System.out.println(fil);
-			//System.out.println(col);
-			}while(col==0 || fil == 0);
-
-			tab[fil][col] =tab[fil][col] +1;
-			tab[fil + 1][col] = tab[fil + 1][col]+1;
-			tab[fil][col + 1] =tab[fil][col + 1] +1;
-			tab[fil][col - 1] =tab[fil][col - 1] +1;
-			tab[fil - 1][col] =tab[fil - 1][col] +1;
-			System.out.println();
-			
-			for (i = 1; i < tab.length - 1; i++) {
+			for (i = 1; i < tab.length - 1; i++) { // FILA
 				for (j = 1; j < tab[0].length - 1; j++) {
-					if (tab[i][j] == 4) {
-						tab[i][j] = 0;
+					// COLUMNA
+					tab[i][j] = 0;
+				}
+			}
+
+			for (int z = 0; z < aux; z++) {
+
+				do {
+					fil = (int) (Math.random() * 7);
+					col = (int) (Math.random() * 7);
+					// System.out.println(fil);
+					// System.out.println(col);
+				} while (col == 0 || fil == 0);
+
+				tab[fil][col] = tab[fil][col] + 1;
+				tab[fil + 1][col] = tab[fil + 1][col] + 1;
+				tab[fil][col + 1] = tab[fil][col + 1] + 1;
+				tab[fil][col - 1] = tab[fil][col - 1] + 1;
+				tab[fil - 1][col] = tab[fil - 1][col] + 1;
+				System.out.println();
+
+				for (i = 1; i < tab.length - 1; i++) {
+					for (j = 1; j < tab[0].length - 1; j++) {
+						if (tab[i][j] == 4) {
+							tab[i][j] = 0;
+						}
+
 					}
 
 				}
 
 			}
-		
-
-		}
-		System.out.println();
-		
-		for (i = 1; i < tab.length - 1; i++) { // FILA
-			System.out.print(" ");
-			for (j = 1; j < tab[0].length - 1; j++) {
-				// COLUMNA
-				System.out.print("|" + tab[i][j] + "|");
-			}
 			System.out.println();
-		}
-		m = tab;
-		}else {
+
+			for (i = 1; i < tab.length - 1; i++) { // FILA
+				System.out.print(" ");
+				for (j = 1; j < tab[0].length - 1; j++) {
+					// COLUMNA
+					System.out.print("|" + tab[i][j] + "|");
+				}
+				System.out.println();
+			}
+			m = tab;
+		} else {
 			tab = m;
 		}
 		return tab;
