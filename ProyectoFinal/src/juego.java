@@ -7,49 +7,63 @@ public class juego {
 	protected static int col;
 	protected static int contjugadas;
 	protected static int golp;
+	protected static boolean flag = false;
 	protected static int niv = 5;
 	protected static Scanner t = new Scanner(System.in);
 
-	public static void tablero(int tab[][], int niv) {
+	public static int[][] tablero(int niv, int tab[][], boolean flag) {
 		int aux = 0, i = 0, j = 0;
 		aux = niv * 3;
+		// System.out.println(aux);
 		int fil = 0;
 		int col = 0;
+		int m[][] = new int[8][8];
 
-		System.out.println("Recomenzar(0 1) - Nuevo(0 2) - Calificación(0 3) -  Cambiar Nivel(0 4) - Salir(0 -2)");
-		System.out.println("");
-		for (int z = 0; z < aux; z++) {
-			do {
-				fil = (int) (Math.random() * 7);
-				col = (int) (Math.random() * 7);
-			} while (col == 0 || fil == 0);
+		if (flag == false) {
 
-			tab[fil][col] = tab[fil][col] + 1;
-			tab[fil + 1][col] = tab[fil + 1][col] + 1;
-			tab[fil][col + 1] = tab[fil][col + 1] + 1;
-			tab[fil][col - 1] = tab[fil][col - 1] + 1;
-			tab[fil - 1][col] = tab[fil - 1][col] + 1;
+			System.out.println("Recomenzar(0 1) - Nuevo(0 2) - Calificación(0 3) -  Cambiar Nivel(0 4) - Salir(0 -2)");
+			System.out.println("");
+			for (int z = 0; z < aux; z++) {
 
-			for (i = 1; i < tab.length - 1; i++) {
-				for (j = 1; j < tab[0].length - 1; j++) {
-					if (tab[i][j] == 4) {
-						tab[i][j] = 0;
+				do {
+					fil = (int) (Math.random() * 7);
+					col = (int) (Math.random() * 7);
+					// System.out.println(fil);
+					// System.out.println(col);
+				} while (col == 0 || fil == 0);
+
+				tab[fil][col] = tab[fil][col] + 1;
+				tab[fil + 1][col] = tab[fil + 1][col] + 1;
+				tab[fil][col + 1] = tab[fil][col + 1] + 1;
+				tab[fil][col - 1] = tab[fil][col - 1] + 1;
+				tab[fil - 1][col] = tab[fil - 1][col] + 1;
+
+				for (i = 1; i < tab.length - 1; i++) {
+					for (j = 1; j < tab[0].length - 1; j++) {
+						if (tab[i][j] == 4) {
+							tab[i][j] = 0;
+						}
+
 					}
-				}
-			}
-		}
-		System.out.println();
 
-		for (i = 1; i < tab.length - 1; i++) {
-			// FILA
-			System.out.print(" ");
-			for (j = 1; j < tab[0].length - 1; j++) {
-				// COLUMNA
-				System.out.print("|" + tab[i][j] + "|");
+				}
+
 			}
 			System.out.println();
-		}
 
+			for (i = 1; i < tab.length - 1; i++) { // FILA
+				System.out.print(" ");
+				for (j = 1; j < tab[0].length - 1; j++) {
+					// COLUMNA
+					System.out.print("|" + tab[i][j] + "|");
+				}
+				System.out.println();
+			}
+			m = tab;
+		} else {
+			tab = m;
+		}
+		return tab;
 	}
 
 	public static int niveles(int tab[][], int niv) {
@@ -123,7 +137,7 @@ public class juego {
 		}
 
 		niv = opc;
-		tablero(tab, niv);
+		tablero(niv, tab, flag);
 		return niv;
 
 	}
@@ -134,141 +148,144 @@ public class juego {
 		do {
 			contjugadas++;
 			do {
+				flag = false;
 				fil = t.nextInt();
 				col = t.nextInt();
 				if (fil == 0 && col == 1) {
 					// RECOMENZAR
+					flag = true;
+					tablero(niv, tab, flag);
 				}
 				if (fil == 0 && col == 2) {
 					// NUEVO
-					tablero(tab, niv);
+					tablero(niv, tab, flag);
 				}
 				if (fil == 0 && col == 3) {
 					// CALIFICACION
-					puntuacion(contjugadas, golp, niv, fil, col);
+					puntuacion(contjugadas, golp, niv, fil, col, punt);
 				}
 				if (fil == 0 && col == 4) {
 					// CAMBIAR NIVEL
 					niveles(tab, niv);
 				}
 
-			} while (fil < -1 || col < -1);
-			{
+			} while ((fil > -1 && fil < 1) || (col > 0 && col < 5));
 
-				// CASILLA EN LA QUE GOLPEA
-				if (tab[fil][col] == 0) {
-					tab[fil][col] = 3;
-					golp++;
-				} else {
-					if (tab[fil][col] == 1) {
-						tab[fil][col] = 0;
-					}
-					if (tab[fil][col] == 2) {
-						tab[fil][col] = 1;
-					}
-
-					if (tab[fil][col] == 3) {
-						tab[fil][col] = 2;
-					}
+			// CASILLA EN LA QUE GOLPEA
+			if (tab[fil][col] == 0) {
+				tab[fil][col] = 3;
+				golp++;
+			} else {
+				if (tab[fil][col] == 1) {
+					tab[fil][col] = 0;
+				}
+				if (tab[fil][col] == 2) {
+					tab[fil][col] = 1;
 				}
 
-				// CASILLA LADO DERECHO
-				if (tab[fil][col + 1] == 0) {
-					tab[fil][col + 1] = 3;
-
-				} else {
-					if (tab[fil][col + 1] == 1) {
-						tab[fil][col + 1] = 0;
-					}
-					if (tab[fil][col + 1] == 2) {
-						tab[fil][col + 1] = 1;
-					}
-
-					if (tab[fil][col + 1] == 3) {
-						tab[fil][col + 1] = 2;
-					}
-				}
-
-				// CASILLA LADO IZQUIERDO
-				if (tab[fil][col - 1] == 0) {
-					tab[fil][col - 1] = 3;
-
-				} else {
-					if (tab[fil][col - 1] == 1) {
-						tab[fil][col - 1] = 0;
-					}
-					if (tab[fil][col - 1] == 2) {
-						tab[fil][col - 1] = 1;
-					}
-
-					if (tab[fil][col - 1] == 3) {
-						tab[fil][col - 1] = 2;
-					}
-				}
-
-				// CASILLA ARRIBA
-
-				if (tab[fil - 1][col] == 0) {
-					tab[fil - 1][col] = 3;
-
-				} else {
-					if (tab[fil - 1][col] == 1) {
-						tab[fil - 1][col] = 0;
-					}
-					if (tab[fil - 1][col] == 2) {
-						tab[fil - 1][col] = 1;
-					}
-
-					if (tab[fil - 1][col] == 3) {
-						tab[fil - 1][col] = 2;
-					}
-				}
-
-				// CASILLA ABAJO
-				if (tab[fil + 1][col] == 0) {
-					tab[fil + 1][col] = 3;
-
-				} else {
-					if (tab[fil + 1][col] == 1) {
-						tab[fil + 1][col] = 0;
-					}
-					if (tab[fil + 1][col] == 2) {
-						tab[fil + 1][col] = 1;
-					}
-
-					if (tab[fil + 1][col] == 3) {
-						tab[fil + 1][col] = 2;
-					}
-				}
-
-				// COMPROBAR SI GANO
-				int cont = 0;
-				int i = 0, j = 0;
-				for (i = 0; i < 6; i++) {
-
-					for (j = 0; j < 6; j++) {
-						if (tab[i][j] == 0) {
-							cont++;
-
-						}
-					}
-					if (cont == 36) {
-						cont = 0;
-						golp = 0;
-						puntuacion(contjugadas, golp, niv, fil, col);
-					}
-
+				if (tab[fil][col] == 3) {
+					tab[fil][col] = 2;
 				}
 			}
+
+			// CASILLA LADO DERECHO
+			if (tab[fil][col + 1] == 0) {
+				tab[fil][col + 1] = 3;
+
+			} else {
+				if (tab[fil][col + 1] == 1) {
+					tab[fil][col + 1] = 0;
+				}
+				if (tab[fil][col + 1] == 2) {
+					tab[fil][col + 1] = 1;
+				}
+
+				if (tab[fil][col + 1] == 3) {
+					tab[fil][col + 1] = 2;
+				}
+			}
+
+			// CASILLA LADO IZQUIERDO
+			if (tab[fil][col - 1] == 0) {
+				tab[fil][col - 1] = 3;
+
+			} else {
+				if (tab[fil][col - 1] == 1) {
+					tab[fil][col - 1] = 0;
+				}
+				if (tab[fil][col - 1] == 2) {
+					tab[fil][col - 1] = 1;
+				}
+
+				if (tab[fil][col - 1] == 3) {
+					tab[fil][col - 1] = 2;
+				}
+			}
+
+			// CASILLA ARRIBA
+
+			if (tab[fil - 1][col] == 0) {
+				tab[fil - 1][col] = 3;
+
+			} else {
+				if (tab[fil - 1][col] == 1) {
+					tab[fil - 1][col] = 0;
+				}
+				if (tab[fil - 1][col] == 2) {
+					tab[fil - 1][col] = 1;
+				}
+
+				if (tab[fil - 1][col] == 3) {
+					tab[fil - 1][col] = 2;
+				}
+			}
+
+			// CASILLA ABAJO
+			if (tab[fil + 1][col] == 0) {
+				tab[fil + 1][col] = 3;
+
+			} else {
+				if (tab[fil + 1][col] == 1) {
+					tab[fil + 1][col] = 0;
+				}
+				if (tab[fil + 1][col] == 2) {
+					tab[fil + 1][col] = 1;
+				}
+
+				if (tab[fil + 1][col] == 3) {
+					tab[fil + 1][col] = 2;
+				}
+			}
+
+			// COMPROBAR SI GANO
+			int cont = 0;
+			int i = 0, j = 0;
+			for (i = 0; i < 6; i++) {
+
+				for (j = 0; j < 6; j++) {
+					if (tab[i][j] == 0) {
+						cont++;
+
+					}
+				}
+				if (cont == 36) {
+					cont = 0;
+					golp = 0;
+					puntuacion(contjugadas, golp, niv, fil, col, punt);
+				}
+
+			}
+
 		} while (fil != 0 || col != -2);
-		{
-			System.out.println("Gracias por jugar :D");
+		System.out.println("Gracias por jugar :D");
+		if (golp == 0) {
+			punt = 0.5;
 		}
 		return golp;
 
 	}
 
-	public static double puntuacion(int contjugadas, int golp, int fil, int col, int niv) {
+	public static double puntuacion(int contjugadas, int golp, int fil, int col, int niv, double punt) {
 		int calificacion = 0;
 
 		// si es la primera vez que se juega

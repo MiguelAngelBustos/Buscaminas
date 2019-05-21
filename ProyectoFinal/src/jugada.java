@@ -5,10 +5,10 @@ public class jugada extends juego{
 		int[][] tab = new int[8][8];
 		
 		jugada uno = new jugada();
-		uno.tablero(tab, niv);
+		uno.tablero(niv, tab, flag);
 		
 			juegos(tab, niv);
-			puntuacion(contjugadas,golp,fil,col,niv);
+			puntuacion(contjugadas,golp,fil,col,niv, punt);
 			mensaje(niv, golp);
 	}
 }
