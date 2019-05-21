@@ -1,3 +1,7 @@
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.Scanner;
 
 public class juego {
@@ -7,6 +11,7 @@ public class juego {
 	protected static int col;
 	protected static int contjugadas;
 	protected static int golp;
+	protected static int m[][] = new int[8][8];
 	protected static boolean flag = false;
 	protected static int niv = 5;
 	protected static Scanner t = new Scanner(System.in);
@@ -17,12 +22,19 @@ public class juego {
 		// System.out.println(aux);
 		int fil = 0;
 		int col = 0;
-		int m[][] = new int[8][8];
 
+	
 		if (flag == false) {
 
 			System.out.println("Recomenzar(0 1) - Nuevo(0 2) - Calificación(0 3) -  Cambiar Nivel(0 4) - Salir(0 -2)");
 			System.out.println("");
+			for (i = 1; i < tab.length - 1; i++) { // FILA
+				for (j = 1; j < tab[0].length - 1; j++) {
+					// COLUMNA
+					tab[i][j] = 0;
+				}
+			}
+
 			for (int z = 0; z < aux; z++) {
 
 				do {
@@ -43,11 +55,8 @@ public class juego {
 						if (tab[i][j] == 4) {
 							tab[i][j] = 0;
 						}
-
 					}
-
 				}
-
 			}
 			System.out.println();
 
@@ -63,8 +72,9 @@ public class juego {
 		} else {
 			tab = m;
 		}
-		return tab;
+		return m;
 	}
+	
 
 	public static int niveles(int tab[][], int niv) {
 		int opc = 5;
@@ -77,7 +87,7 @@ public class juego {
 		 * while (aux < 1 || aux > 2);
 		 */
 
-		if (aux == 1) {
+		if (aux == 2) {
 			do {
 				try {
 					System.out.println("¿Que nivel desea?");
@@ -142,12 +152,12 @@ public class juego {
 
 	}
 
-	public static int juegos(int[][] tab, int niv) {
-
+	public static int juegos(int[][] tab, int niv,int[][] m) {
 		Scanner t = new Scanner(System.in);
 		do {
-			contjugadas++;
+			contjugadas++;		
 			do {
+				tablero(niv, tab, flag);
 				flag = false;
 				fil = t.nextInt();
 				col = t.nextInt();
@@ -172,6 +182,7 @@ public class juego {
 			} while ((fil > -1 && fil < 1) || (col > 0 && col < 5));
 
 			// CASILLA EN LA QUE GOLPEA
+			
 			if (tab[fil][col] == 0) {
 				tab[fil][col] = 3;
 				golp++;
@@ -191,6 +202,7 @@ public class juego {
 			// CASILLA LADO DERECHO
 			if (tab[fil][col + 1] == 0) {
 				tab[fil][col + 1] = 3;
+				
 
 			} else {
 				if (tab[fil][col + 1] == 1) {
@@ -285,47 +297,75 @@ public class juego {
 
 	}
 
-	public static double puntuacion(int contjugadas, int golp, int fil, int col, int niv, double punt) {
+	public static double puntuacion(int contpartidas, int golpes, int fil, int col, int niv, double punt) {
 		int calificacion = 0;
+		double aux = punt;
 
 		// si es la primera vez que se juega
 
-		if (contjugadas == 1) {
+		if (contpartidas == 1) {
 			calificacion = 1;
 		}
 
 		// calculo de la puntuación de los niveles
-		if (niv == 0) {
-			calificacion = 3 / golp;
-		} else if (niv == 0) {
-			calificacion = 6 / golp;
-		} else if (niv == 1) {
-			calificacion = 9 / golp;
+		if (niv == 1) {
+			calificacion = 3 / golpes;
 		} else if (niv == 2) {
-			calificacion = 12 / golp;
+			calificacion = 6 / golpes;
+		} else if (niv == 3) {
+			calificacion = 9 / golpes;
 		} else if (niv == 4) {
-			calificacion = 15 / golp;
+			calificacion = 12 / golpes;
 		} else if (niv == 5) {
-			calificacion = 18 / golp;
+			calificacion = 15 / golpes;
 		} else if (niv == 6) {
-			calificacion = 21 / golp;
+			calificacion = 18 / golpes;
 		} else if (niv == 7) {
-			calificacion = 24 / golp;
+			calificacion = 21 / golpes;
 		} else if (niv == 8) {
-			calificacion = 27 / golp;
+			calificacion = 24 / golpes;
 		} else if (niv == 9) {
-			calificacion = 30 / golp;
+			calificacion = 27 / golpes;
 		}
 
 		// abandono juego
-		if (fil == 0 && col == -2 & golp == 0) {
+		if (fil == 0 && col == -2 & golpes == 0) {
 			calificacion = 0;
 		}
-		if (fil == 0 && col == -2 & golp > 0) {
+		if (fil == 0 && col == -2 & golpes > 0) {
 			calificacion = 1;
 		}
 
 		punt += calificacion;
+
+		if (punt > aux) {
+			File archivo = new File("archivo.txt");
+			BufferedWriter bw = null;
+
+			System.out.println(aux);
+			try {
+				if (archivo.exists()) {
+					// El fichero existe
+					bw = new BufferedWriter(new FileWriter("archivo.txt"));
+					bw.write("El fichero de texto ya esta creado");
+					bw.write((int) aux);
+				} else {
+					// El fichero no existe y hay que crearlo
+					bw = new BufferedWriter(new FileWriter("archivo.txt"));
+					bw.write("Acabo de crear el fichero de texto");
+					bw.write("El fichero de texto ya esta creado");
+					bw.write((int) aux);
+				}
+			} catch (IOException e) {
+				e.printStackTrace();
+			} finally {
+				try {
+					bw.close();
+				} catch (IOException e1) {
+					e1.printStackTrace();
+				}
+			}
+		}
 		return punt;
 	}
 
