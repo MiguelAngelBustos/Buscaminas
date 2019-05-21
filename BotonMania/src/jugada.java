@@ -1,12 +1,10 @@
-
 public class jugada extends juego{
 
 	public static void main(String[] args) {
-		char[][] m = new char[8][8];
-		int niv=5;
-		jugada uno = new jugada();
-		uno.tablero(m, niv);
+		int[][] tab = new int[8][8];
 		
+			juegos(tab, niv,m);
+			puntuacion(contjugadas,golp,fil,col,niv, punt);
+			mensaje(niv, golp);
 	}
-
 }
