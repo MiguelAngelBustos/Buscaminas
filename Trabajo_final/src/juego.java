@@ -1,3 +1,7 @@
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.Scanner;
 
 public class juego {
@@ -101,34 +105,33 @@ public class juego {
 
 		public static double puntuacion(int contpartidas, int golpes, int fil, int col, int niv) {
 			int calificacion=0;
+			double aux = punt;
 			
 			//si es la primera vez que se juega 
 			
-			/*if(contpartidas==1){
-			 * calificacion=1
-			 * }*/
+			if(contpartidas==1){
+			  calificacion=1;
+			  }
 			
 			//calculo de la puntuación de los niveles
-			if(niv==0){
+			if(niv==1){
 				 calificacion = 3/golpes;
-			}else if(niv==0){
-				 calificacion = 6/golpes;
-			}else if(niv==1){
-				 calificacion = 9/golpes;
 			}else if(niv==2){
-				 calificacion = 12/golpes;
+				 calificacion = 6/golpes;
+			}else if(niv==3){
+				 calificacion = 9/golpes;
 			}else if(niv==4){
-				 calificacion = 15/golpes;
+				 calificacion = 12/golpes;
 			}else if(niv==5){
-				 calificacion = 18/golpes;
+				 calificacion = 15/golpes;
 			}else if(niv==6){
-				 calificacion = 21/golpes;
+				 calificacion = 18/golpes;
 			}else if(niv==7){
-				 calificacion = 24/golpes;
+				 calificacion = 21/golpes;
 			}else if(niv==8){
-				 calificacion = 27/golpes;
+				 calificacion = 24/golpes;
 			}else if(niv==9){
-				 calificacion = 30/golpes;
+				 calificacion = 27/golpes;
 			}
 			
 			//abandono juego 
@@ -140,6 +143,36 @@ public class juego {
 			}
 			
 			punt += calificacion;
+			
+			if(punt > aux){
+				File archivo = new File("archivo.txt");
+				BufferedWriter bw = null;
+				
+				System.out.println(aux);
+				try{
+					if (archivo.exists()) {
+					// El fichero existe
+					bw = new BufferedWriter(new FileWriter("archivo.txt"));
+					bw.write("El fichero de texto ya esta creado");
+					bw.write((int) aux);
+				} else {
+					// El fichero no existe y hay que crearlo
+					bw = new BufferedWriter(new FileWriter("archivo.txt"));
+					bw.write("Acabo de crear el fichero de texto");
+					bw.write("El fichero de texto ya esta creado");
+					bw.write((int) aux);
+				}
+				}catch (IOException e){
+					e.printStackTrace();
+				}
+				finally {
+					try{
+						bw.close();
+					}catch(IOException e1){
+						e1.printStackTrace();
+					}
+				}
+			}
 			return punt;	
 		}
 		
@@ -159,6 +192,7 @@ public class juego {
 			}else{
 				System.out.println("Hecho en " +golp+ "golpes");
 			}
+			
 		}
-	}
+}
 
