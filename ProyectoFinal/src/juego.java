@@ -12,13 +12,14 @@ public class juego {
 	juego() {
 
 	}
-	public static void tablero(int niv, int tab[][]) {
+	public static int[][] tablero(int niv, int tab[][], boolean flag) {
 		int aux = 0, i = 0, j = 0;
 		aux = niv * 3;
-		System.out.println(aux);
+		//System.out.println(aux);
 		int fil = 0;
 		int col = 0;
-		for (i = 1; i < tab.length - 1; i++) { // FILA
+		int m [][] = new int [8][8];
+		/*for (i = 1; i < tab.length - 1; i++) { // FILA
 			System.out.print(" ");
 			for (j = 1; j < tab[0].length - 1; j++) {
 				// COLUMNA
@@ -26,7 +27,8 @@ public class juego {
 				System.out.print("|" + tab[i][j] + "|");
 			}
 			System.out.println();
-		}
+		}*/
+		if (flag == false) {
 		for (int z = 0; z < aux; z++) {
 
 			do {
@@ -65,7 +67,11 @@ public class juego {
 			}
 			System.out.println();
 		}
-
+		m = tab;
+		}else {
+			tab = m;
+		}
+		return tab;
 	}
 
 	public static int niveles(int niv) {
