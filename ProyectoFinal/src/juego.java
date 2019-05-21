@@ -77,7 +77,7 @@ public class juego {
 	public static int niveles(int niv) {
 		int opc = 5;
 		int aux = 2;
-		String nlvl;
+		String nlvl; 
 		do {
 		try {
 			System.out.println("¿Desea cambiar de nivel?");
