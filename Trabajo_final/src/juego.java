@@ -112,7 +112,7 @@ public class juego {
 			if(contpartidas==1){
 			  calificacion=1;
 			  }
-			
+	while(golpes>0){		
 			//calculo de la puntuación de los niveles
 			if(niv==1){
 				 calificacion = 3/golpes;
@@ -133,7 +133,7 @@ public class juego {
 			}else if(niv==9){
 				 calificacion = 27/golpes;
 			}
-			
+	}	
 			//abandono juego 
 			if(fil==0 && col==-2 & golpes==0){
 				calificacion=0;
@@ -185,7 +185,7 @@ public class juego {
 			aux=niv*3;
 			
 			if(golp==aux){
-				System.out.println("Perfecto. Hecho en "+aux +golp+ "golpes");
+				System.out.println("Perfecto. Hecho en " +golp+ "golpes");
 			}
 			else if(golp<aux){
 				System.out.println("Extraordinariamente bien. Hecho en " +golp+ "golpes");
