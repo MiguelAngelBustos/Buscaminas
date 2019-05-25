@@ -14,8 +14,8 @@ public class juego {
 	protected static int golp;
 	protected static int m[][] = new int[8][8];
 	protected static boolean flag = false;
-	protected static int niv=5;
-	protected static String nlvl="Alto";
+	protected static int niv = 5;
+	protected static String nlvl = "Alto";
 	protected static Scanner t = new Scanner(System.in);
 
 	public static int[][] tablero(int niv, int tab[][], boolean flag) {
@@ -33,9 +33,8 @@ public class juego {
 					tab[i][j] = 0;
 				}
 			}
-			
-			
-			//GENERA LAS POSICIONES RANDOM
+
+			// GENERA LAS POSICIONES RANDOM
 			for (int z = 0; z < aux; z++) {
 
 				do {
@@ -44,24 +43,23 @@ public class juego {
 					// System.out.println(fil);
 					// System.out.println(col);
 				} while (col == 0 || fil == 0);
-				
-				
-				//POSICIONES DE ARRIBA ABAJO IZQUIERDA Y DERECHA
+
+				// POSICIONES DE ARRIBA ABAJO IZQUIERDA Y DERECHA
 				tab[fil][col] = tab[fil][col] + 1;
 				tab[fil + 1][col] = tab[fil + 1][col] + 1;
 				tab[fil][col + 1] = tab[fil][col + 1] + 1;
 				tab[fil][col - 1] = tab[fil][col - 1] + 1;
 				tab[fil - 1][col] = tab[fil - 1][col] + 1;
-				
-				//CAMBIAR LOS NUMEROS QUE SEAN IGUAL A CUATRO EN CEROS
+
+				// CAMBIAR LOS NUMEROS QUE SEAN IGUAL A CUATRO EN CEROS
 				for (i = 1; i < tab.length - 1; i++) {
 					for (j = 1; j < tab[0].length - 1; j++) {
 						if (tab[i][j] == 4) {
 							tab[i][j] = 0;
 
 						}
-						
-						//GUARDA TAB EN UNA MATRIZ M
+
+						// GUARDA TAB EN UNA MATRIZ M
 						m[i][j] = tab[i][j];
 					}
 				}
@@ -69,8 +67,8 @@ public class juego {
 			System.out.println();
 
 		} else {
-			
-			//SOBREESCRIBIR LA MATRIZ TAB PARA RECOMENZAR 
+
+			// SOBREESCRIBIR LA MATRIZ TAB PARA RECOMENZAR
 			for (i = 1; i < tab.length - 1; i++) {
 				for (j = 1; j < tab[0].length - 1; j++) {
 					tab[i][j] = m[i][j];
@@ -81,8 +79,8 @@ public class juego {
 	}
 
 	public static void JuegaTablero(int tab[][], double punt) {
-		
-		//PINTA LA MATRIZ TAB (EN LA QUE SE JUEGA)
+
+		// PINTA LA MATRIZ TAB (EN LA QUE SE JUEGA)
 		System.out.println("Recomenzar(0 1) - Nuevo(0 2) - Calificación(0 3) -  Cambiar Nivel(0 4) - Salir(0 -2)");
 		System.out.println("");
 		for (int i = 1; i < tab.length - 1; i++) { // FILA
@@ -94,70 +92,71 @@ public class juego {
 			System.out.println();
 		}
 		System.out.println();
-		System.out.println("Nivel de juego: "+nlvl+" ("+niv*3+"golpes)"+" \t \t Puntuacion en nivel: "+punt);
-		System.out.print("Golpes realizados: "+golp+"\t \t \t \t Golpe (fila columna): ");
+		System.out.println(
+				"Nivel de juego: " + nlvl + " (" + niv * 3 + "golpes)" + " \t \t Puntuacion en nivel: " + punt);
+		System.out.print("Golpes realizados: " + golp + "\t \t \t \t Golpe (fila columna): ");
 	}
 
 	public static int niveles(int tab[][]) {
 
 		int opc = 5;
-			do {
-				try {
-					//TE DEJA ELEGIR EL NIVEL
-					System.out.println(" ");
-					System.out.println("¿Que nivel desea?");
-					System.out.println("1.-NOVATO");
-					System.out.println("2.-SEMI-NOVATO");
-					System.out.println("3.-INTERMEDIO");
-					System.out.println("4.-INTERMEDIO-ALTO");
-					System.out.println("5.-ALTO");
-					System.out.println("6.-MUY ALTO");
-					System.out.println("7.-EXPERTO");
-					System.out.println("8.-SEMI-DIOS");
-					System.out.println("9.-DIOS");
-					opc = t.nextInt();
-				} catch (Exception e) {
-					System.out.println("ERROR AL ELEGIR EL NIVEL");
-				}
-			} while (opc < 1 || opc > 9);
-			switch (opc) {
-			case 1:
-				nlvl = "Novato";
-				System.out.println("Has elegido el nivel " + nlvl);
-				break;
-			case 2:
-				nlvl = "Semi-Novato";
-				System.out.println("Has elegido el nivel " + nlvl);
-				break;
-			case 3:
-				nlvl = "Intermedio";
-				System.out.println("Has elegido el nivel " + nlvl);
-				break;
-			case 4:
-				nlvl = "Intermedio-alto";
-				System.out.println("Has elegido el nivel " + nlvl);
-				break;
-			case 5:
-				nlvl = "Alto";
-				System.out.println("Has elegido el nivel " + nlvl);
-				break;
-			case 6:
-				nlvl = "Muy Alto";
-				System.out.println("Has elegido el nivel " + nlvl);
-				break;
-			case 7:
-				nlvl = "Experto";
-				System.out.println("Has elegido el nivel " + nlvl);
-				break;
-			case 8:
-				nlvl = "Semi-Dios";
-				System.out.println("Has elegido el nivel " + nlvl);
-				break;
-			case 9:
-				nlvl = "Dios";
-				System.out.println("Has elegido el nivel " + nlvl);
-				break;
+		do {
+			try {
+				// TE DEJA ELEGIR EL NIVEL
+				System.out.println(" ");
+				System.out.println("¿Que nivel desea?");
+				System.out.println("1.-NOVATO");
+				System.out.println("2.-SEMI-NOVATO");
+				System.out.println("3.-INTERMEDIO");
+				System.out.println("4.-INTERMEDIO-ALTO");
+				System.out.println("5.-ALTO");
+				System.out.println("6.-MUY ALTO");
+				System.out.println("7.-EXPERTO");
+				System.out.println("8.-SEMI-DIOS");
+				System.out.println("9.-DIOS");
+				opc = t.nextInt();
+			} catch (Exception e) {
+				System.out.println("ERROR AL ELEGIR EL NIVEL");
 			}
+		} while (opc < 1 || opc > 9);
+		switch (opc) {
+		case 1:
+			nlvl = "Novato";
+			System.out.println("Has elegido el nivel " + nlvl);
+			break;
+		case 2:
+			nlvl = "Semi-Novato";
+			System.out.println("Has elegido el nivel " + nlvl);
+			break;
+		case 3:
+			nlvl = "Intermedio";
+			System.out.println("Has elegido el nivel " + nlvl);
+			break;
+		case 4:
+			nlvl = "Intermedio-alto";
+			System.out.println("Has elegido el nivel " + nlvl);
+			break;
+		case 5:
+			nlvl = "Alto";
+			System.out.println("Has elegido el nivel " + nlvl);
+			break;
+		case 6:
+			nlvl = "Muy Alto";
+			System.out.println("Has elegido el nivel " + nlvl);
+			break;
+		case 7:
+			nlvl = "Experto";
+			System.out.println("Has elegido el nivel " + nlvl);
+			break;
+		case 8:
+			nlvl = "Semi-Dios";
+			System.out.println("Has elegido el nivel " + nlvl);
+			break;
+		case 9:
+			nlvl = "Dios";
+			System.out.println("Has elegido el nivel " + nlvl);
+			break;
+		}
 
 		niv = opc;
 		tablero(niv, tab, flag);
@@ -169,36 +168,36 @@ public class juego {
 		Scanner t = new Scanner(System.in);
 		String aux;
 		StringTokenizer str;
-		//SALIR AL PONER EL 0 -2
+		// SALIR AL PONER EL 0 -2
 		do {
 			contjugadas++;
 			flag = false;
 			do {
 				try {
-					
+
 					JuegaTablero(tab, punt);
 					aux = t.nextLine();
 					str = new StringTokenizer(aux);
-					
-					fil=Integer.parseInt(str.nextToken());	
-					col=Integer.parseInt(str.nextToken());
-					golp++;		
+
+					fil = Integer.parseInt(str.nextToken());
+					col = Integer.parseInt(str.nextToken());
+					golp++;
 				} catch (Exception e) {
 					System.out.println("Error.");
 					System.out.println("Introduce un numero valido");
 					System.out.println();
 				}
-				
+
 			} while ((fil < -1 || fil > 6) || (col < -2 || col > 6) || col == -1);
 			if (fil == 0 && col == 1) {
 				// RECOMENZAR
 				flag = true;
-				golp=0;
+				golp = 0;
 				tablero(niv, tab, flag);
 			}
 			if (fil == 0 && col == 2) {
 				// NUEVO
-				golp=0;
+				golp = 0;
 				tablero(niv, tab, flag);
 			}
 			if (fil == 0 && col == 3) {
@@ -208,10 +207,9 @@ public class juego {
 			}
 			if (fil == 0 && col == 4) {
 				// CAMBIAR NIVEL
-				golp=0;
+				golp = 0;
 				niveles(tab);
 			}
-
 
 			if (fil != 0) {
 
@@ -329,6 +327,7 @@ public class juego {
 		return golp;
 
 	}
+
 	public static double puntuacion(int contpartidas, int fil, int col) {
 		double calificacion = 0;
 		double aux = punt;
@@ -337,8 +336,9 @@ public class juego {
 		if (contpartidas == 1) {
 			calificacion = 1;
 		}
-		
-		while (golp > 0) {
+		int contgolp = 0;
+		do {
+
 			// calculo de la puntuación de los niveles
 			// los golpes recomendados son el numero del nivel por 3
 			if (niv == 1) {
@@ -360,8 +360,12 @@ public class juego {
 			} else if (niv == 9) {
 				calificacion = 27 / golp;
 			}
-		}
-		System.out.println(calificacion);
+			contgolp++;
+		} while (golp > 0 && contgolp == 1);
+
+		System.out.println(punt+ "puntuacion");
+
+		System.out.println(calificacion+ "calificacion");
 		// abandono juego
 		if (fil == 0 && col == -2 & golp == 0) {
 			calificacion = 0.5;
@@ -370,8 +374,7 @@ public class juego {
 			calificacion = 1;
 		}
 
-		punt += calificacion;
-		
+
 		if (punt > aux) {
 			File archivo = new File("archivo.txt");
 			BufferedWriter bw = null;
