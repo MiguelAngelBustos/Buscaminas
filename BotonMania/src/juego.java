@@ -18,7 +18,7 @@ public class juego {
 	protected static String nlvl = "Alto";
 	protected static Scanner t = new Scanner(System.in);
 	protected static boolean flagtab = false;
-
+	protected static double v[] = new double [9];
 	
 	/*
 	 * 
@@ -377,35 +377,40 @@ public class juego {
 
 	}
 
+
 	/*
 	 * 
 	 */
 	public static double puntuacion(int contpartidas, int fil, int col) {
 
 		int contadorjug = 0;
+		
 		while (golp > 0 && contadorjug == 0) {
 			// calculo de la puntuación de los niveles
 			// los golpes recomendados son el numero del nivel por 3
 			if (niv == 1) {
-				punt = 3 / golp;
+				v[0] = 3 / golp;
 			} else if (niv == 2) {
-				punt = 6 / golp;
+				v[1] = 6 / golp;
 			} else if (niv == 3) {
-				punt = 9 / golp;
+				v[2] = 9 / golp;
 			} else if (niv == 4) {
-				punt = 12 / golp;
+				v[3] = 12 / golp;
 			} else if (niv == 5) {
-				punt = 15 / golp;
+				v[4] = 15 / golp;
 			} else if (niv == 6) {
-				punt = 18 / golp;
+				v[5] = 18 / golp;
 			} else if (niv == 7) {
-				punt = 21 / golp;
+				v[6] = 21 / golp;
 			} else if (niv == 8) {
-				punt = 24 / golp;
+				v[7] = 24 / golp;
 			} else if (niv == 9) {
-				punt = 27 / golp;
+				v[8] = 27 / golp;
 			}
 			contadorjug++;
+			
+			punt = v[niv]; 
+			
 		}
 		return punt;
 
@@ -428,8 +433,20 @@ public class juego {
 		if (fil == 0 && col == -2 && golp > 0) {
 			calificacion = 1;
 		}
+		System.out.println("----------------");
+		System.out.println("Calificaciones: ");
+		System.out.println("----------------");
 		
-	
+		System.out.println("Novato: " +v[0]);
+		System.out.println("Semi-Novato: "+v[1]);
+		System.out.println("Intermedio: "+v[2]);
+		System.out.println("Intermedio-Alto: " +v[3]);
+		System.out.println("Alto: " +v[4]);
+		System.out.println("Muy Alto: "+v[5]);
+		System.out.println("Experto: "+v[6]);
+		System.out.println("Semi-Dios: "+v[7]);
+		System.out.println("Dios: "+v[8]);
+		
 
 		if (punt > aux) {
 			File archivo = new File("archivo.txt");
