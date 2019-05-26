@@ -201,7 +201,7 @@ public class juego {
 					
 					fil=Integer.parseInt(str.nextToken());	
 					col=Integer.parseInt(str.nextToken());
-					golp++;		
+					golp++;	
 				} catch (Exception e) {
 					System.out.println("Error.");
 					System.out.println("Introduce un numero valido");
@@ -319,6 +319,7 @@ public class juego {
 						tab[fil + 1][col] = 2;
 					}
 				}
+				puntuacion(niv, fil, col);
 			}
 
 			// COMPROBAR SI GANO
@@ -391,7 +392,7 @@ public class juego {
 		}
 		
 		punt = calificacion;
-		System.out.println(punt + " Puntuacion");
+		//System.out.println(punt + " Puntuacion");
 		
 
 		
