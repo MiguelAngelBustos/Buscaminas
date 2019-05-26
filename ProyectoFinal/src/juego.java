@@ -82,6 +82,7 @@ public class juego {
 		return tab;
 	}
 
+	
 	public static void JuegaTablero(int tab[][], double punt) {
 		
 		//PINTA LA MATRIZ TAB (EN LA QUE SE JUEGA)
