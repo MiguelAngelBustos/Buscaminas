@@ -14,12 +14,12 @@ public class juego {
 	protected static double golp;
 	protected static int m[][] = new int[8][8];
 	protected static boolean flag = false;
-	protected static int niv = 5;
+	protected static int niv;
 	protected static String nlvl = "Alto";
 	protected static Scanner t = new Scanner(System.in);
 	protected static boolean flagtab = false;
 
-	public static int[][] tablero(int niv, int tab[][], boolean flag) {
+	public static int[][] tablero(int tab[][], boolean flag) {
 		int aux = 0, i = 0, j = 0;
 		aux = niv * 3;
 		// System.out.println(aux);
@@ -181,7 +181,7 @@ public class juego {
 		}
 
 		niv = opc;
-		tablero(niv, tab, flag);
+		tablero( tab, flag);
 		return niv;
 
 	}
@@ -216,13 +216,13 @@ public class juego {
 				flag = true;
 				golp = 0;
 				punt = 0;
-				tablero(niv, tab, flag);
+				tablero(tab, flag);
 			}
 			if (fil == 0 && col == 2) {
 				// NUEVO
 				golp = 0;
 				punt = 0;
-				tablero(niv, tab, flag);
+				tablero(tab, flag);
 			}
 			if (fil == 0 && col == 3) {
 				// CALIFICACION
