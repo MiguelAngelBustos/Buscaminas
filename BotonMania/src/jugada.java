@@ -5,7 +5,7 @@ public class jugada extends juego {
 		niv = 5;
 		tablero( tab, flag);
 		juegos(tab, niv, m);
-		puntuacion(contjugadas, fil, col);
+		puntuacion();
 		mensaje(niv, golp);
 	}
 }

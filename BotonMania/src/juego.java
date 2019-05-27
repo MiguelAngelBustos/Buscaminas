@@ -16,7 +16,7 @@ import java.util.StringTokenizer;
 
 public class juego {
 	protected static int mov = 0;
-	protected static double punt = 0;
+	protected static double punt = 1;
 	protected static int fil;
 	protected static int col;
 	protected static int contjugadas;
@@ -31,7 +31,7 @@ public class juego {
 	
 	/*
 	 * @name tablero
-	 * Metodo tablero genera el tablero dependiendo del nivel
+	 * @description: Metodo tablero genera el tablero dependiendo del nivel
 	 * @param tab[][], flag
 	 * return tab
 	 */
@@ -98,7 +98,7 @@ public class juego {
 	
 	/*
 	 * @name juegaTablero
-	 * Metodo que va a pintar el tablero
+	 * @description: Metodo que va a pintar el tablero
 	 * @param tab[][], punt
 	 * return void
 	 */
@@ -146,7 +146,7 @@ public class juego {
 	
 	/*
 	 * @name niveles
-	 * Metodo que va a dar a elegir entre los niveles disponibles, dando como resultado el nivel elegido y un mensaje correspondiente a cada nivel
+	 * @description: Metodo que va a dar a elegir entre los niveles disponibles, dando como resultado el nivel elegido y un mensaje correspondiente a cada nivel
 	 * @param tab[][]
 	 * return niv
 	 */
@@ -219,8 +219,8 @@ public class juego {
 
 	/*
 	 * @name juegos
-	 * Metodo que va a ofrecer las diferentes opciones que hay en el juego:
-	 * salir, recomenzar, nuevo, calificación, cambiar de nivel y comprobar si se ha ganado la partida.
+	 * @description: Metodo que va a ofrecer las diferentes opciones que hay en el juego: 
+	 * 				 salir, recomenzar, nuevo, calificación, cambiar de nivel y comprobar si se ha ganado la partida.
 	 * @param [][]tab, niv, m
 	 * @return golp
 	 */
@@ -248,7 +248,7 @@ public class juego {
 					System.out.println();
 				}
 
-				if((fil < -1 || fil>6) || (col < 2 || col>6) && col !=-2) {
+				if((fil < -1 || fil>6) || (col < 1 || col>6) && col !=-2) {
 					System.out.println("Error");
 					System.out.println("El número de filas y columnas tiene que ser entre 1 y 6");
 					golp--;
@@ -368,7 +368,7 @@ public class juego {
 						tab[fil + 1][col] = 2;
 					}
 				}
-				puntuacion(niv, fil, col);
+				puntuacion();
 			}
 
 			// COMPROBAR SI GANO
@@ -402,41 +402,22 @@ public class juego {
 
 	/*
 	 * @name puntuacion
-	 * Metodo que obtendrá la puntuación segun el nivel, el numero de golpes y el golpe efectuado sobre el tablero
+	 * @description: Metodo que obtendrá la puntuación segun el nivel, el numero de golpes y el golpe efectuado sobre el tablero
 	 * @param contpartidas, fil, col.
-	 * @return punt
 	 */
-	public static double puntuacion(int contpartidas, int fil, int col) {
+	public static double puntuacion() {
 
-		int contadorjug = 0;
+		// calculo de la puntuación de los niveles
+		// los golpes recomendados son el numero del nivel por 3
 		
-		while (golp > 0 && contadorjug == 0) {
-			// calculo de la puntuación de los niveles
-			// los golpes recomendados son el numero del nivel por 3
-			if (niv == 1) {
-				v[0] = 3 / golp;
-			} else if (niv == 2) {
-				v[1] = 6 / golp;
-			} else if (niv == 3) {
-				v[2] = 9 / golp;
-			} else if (niv == 4) {
-				v[3] = 12 / golp;
-			} else if (niv == 5) {
-				v[4] = 15 / golp;
-			} else if (niv == 6) {
-				v[5] = 18 / golp;
-			} else if (niv == 7) {
-				v[6] = 21 / golp;
-			} else if (niv == 8) {
-				v[7] = 24 / golp;
-			} else if (niv == 9) {
-				v[8] = 27 / golp;
-			}
-			contadorjug++;
-			
-			punt = v[niv]; 
-			
-		}
+		System.out.println("Vector: " + v[(niv-1)]);
+		System.out.println("Golpes: " + golp);
+		
+		
+		v[(niv-1)] = (3*niv) / golp;
+		
+		punt = v[niv-1]; 
+
 		return punt;
 
 	}
@@ -444,7 +425,7 @@ public class juego {
 	
 	/*
 	 * @name calificacion
-	 * Metodo que dará como resultado un fichero con la calificación obtenida
+	 * @description: Metodo que dará como resultado un fichero con la calificación obtenida
 	 * @param contpartidas, fil, col
 	 * @return punt  
 	 */
@@ -512,7 +493,7 @@ public class juego {
 	
 	/*
 	 * @name mensaje
-	 * Metodo que dara como resultado un mensaje dependiendo de la calidicación obtenida 
+	 * @description: Metodo que dara como resultado un mensaje dependiendo de la calidicación obtenida 
 	 * @param niv, golp
 	 * @return void
 	 */
@@ -536,7 +517,7 @@ public class juego {
 		int contpartidas = 0;
 		contpartidas++;
 		flagtab = true;
-		puntuacion(contpartidas, aux, (int) golp);
+		puntuacion();
 
 	}
 }
