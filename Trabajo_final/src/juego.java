@@ -1,10 +1,11 @@
 /**
- * Esta clase define 
+ * Esta clase define los metodos con los que se trabajan en el juego ButtonMania
  * @author Luis Antonio Gilarte Lopez
  * @author Miguel Angel Bustos Simon
  * @author Jorge Garcia Castilla
  * @author Adrian Ramos Robles 
  */
+
 
 import java.io.BufferedWriter;
 import java.io.File;
@@ -29,7 +30,10 @@ public class juego {
 
 	
 	/*
-	 * 
+	 * @name tablero
+	 * Metodo tablero genera el tablero dependiendo del nivel
+	 * @param tab[][], flag
+	 * return tab
 	 */
 	public static int[][] tablero(int tab[][], boolean flag) {
 		int aux = 0, i = 0, j = 0;
@@ -93,7 +97,10 @@ public class juego {
 
 	
 	/*
-	 * 
+	 * @name juegaTablero
+	 * Metodo que va a pintar el tablero
+	 * @param tab[][], punt
+	 * return void
 	 */
 	public static void JuegaTablero(int tab[][], double punt) {
 
@@ -138,7 +145,10 @@ public class juego {
 
 	
 	/*
-	 * 
+	 * @name niveles
+	 * Metodo que va a dar a elegir entre los niveles disponibles, dando como resultado el nivel elegido y un mensaje correspondiente a cada nivel
+	 * @param tab[][]
+	 * return niv
 	 */
 	public static int niveles(int tab[][]) {
 
@@ -208,7 +218,11 @@ public class juego {
 	}
 
 	/*
-	 * 
+	 * @name juegos
+	 * Metodo que va a ofrecer las diferentes opciones que hay en el juego:
+	 * salir, recomenzar, nuevo, calificación, cambiar de nivel y comprobar si se ha ganado la partida.
+	 * @param [][]tab, niv, m
+	 * @return golp
 	 */
 	public static int juegos(int[][] tab, int niv, int[][] m) {
 		Scanner t = new Scanner(System.in);
@@ -379,7 +393,10 @@ public class juego {
 	}
 
 	/*
-	 * 
+	 * @name puntuacion
+	 * Metodo que obtendrá la puntuación segun el nivel, el numero de golpes y el golpe efectuado sobre el tablero
+	 * @param contpartidas, fil, col.
+	 * @return punt
 	 */
 	public static double puntuacion(int contpartidas, int fil, int col) {
 
@@ -412,7 +429,12 @@ public class juego {
 
 	}
 	
-	
+	/*
+	 * @name calificacion
+	 * Metodo que dará como resultado un fichero con la calificación obtenida
+	 * @param contpartidas, fil, col
+	 * @return punt  
+	 */
 	public static double calificacion(int contpartidas, int fil, int col) {
 		double calificacion = 0;
 		double aux = punt;
@@ -473,7 +495,10 @@ public class juego {
 
 	
 	/*
-	 * 
+	 * @name mensaje
+	 * Metodo que dara como resultado un mensaje dependiendo de la calidicación obtenida 
+	 * @param niv, golp
+	 * @return void
 	 */
 	public static void mensaje(int niv, double golp) {
 		int aux;
