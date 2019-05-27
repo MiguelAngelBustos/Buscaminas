@@ -1,3 +1,12 @@
+/**
+ * Esta clase define los metodos con los que se trabajan en el juego ButtonMania
+ * @author Luis Antonio Gilarte Lopez
+ * @author Miguel Angel Bustos Simon
+ * @author Jorge Garcia Castilla
+ * @author Adrian Ramos Robles 
+ */
+
+
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
@@ -11,14 +20,22 @@ public class juego {
 	protected static int fil;
 	protected static int col;
 	protected static int contjugadas;
-	protected static int golp;
+	protected static double golp;
 	protected static int m[][] = new int[8][8];
 	protected static boolean flag = false;
-	protected static int niv = 5;
+	protected static int niv;
 	protected static String nlvl = "Alto";
 	protected static Scanner t = new Scanner(System.in);
-
-	public static int[][] tablero(int niv, int tab[][], boolean flag) {
+	protected static boolean flagtab = false;
+	protected static double v[] = new double [9];
+	
+	/*
+	 * @name tablero
+	 * Metodo tablero genera el tablero dependiendo del nivel
+	 * @param tab[][], flag
+	 * return tab
+	 */
+	public static int[][] tablero(int tab[][], boolean flag) {
 		int aux = 0, i = 0, j = 0;
 		aux = niv * 3;
 		// System.out.println(aux);
@@ -78,25 +95,61 @@ public class juego {
 		return tab;
 	}
 
+	
+	/*
+	 * @name juegaTablero
+	 * Metodo que va a pintar el tablero
+	 * @param tab[][], punt
+	 * return void
+	 */
 	public static void JuegaTablero(int tab[][], double punt) {
 
 		// PINTA LA MATRIZ TAB (EN LA QUE SE JUEGA)
-		System.out.println("Recomenzar(0 1) - Nuevo(0 2) - Calificaci�n(0 3) -  Cambiar Nivel(0 4) - Salir(0 -2)");
 		System.out.println("");
-		for (int i = 1; i < tab.length - 1; i++) { // FILA
-			System.out.print(" ");
-			for (int j = 1; j < tab[0].length - 1; j++) {
-				// COLUMNA
-				System.out.print("|" + tab[i][j] + "|");
-			}
+		System.out.println("Recomenzar(0 1) - Nuevo(0 2) - Calificación(0 3) -  Cambiar Nivel(0 4) - Salir(0 -2)");
+		System.out.println("");
+		if (flagtab == false) {
+
+			System.out.println("┌───┬───┬───┬───┬───┬───┐");
+			System.out.println("│ " + tab[1][1] + " │ " + tab[1][2] + " │ " + tab[1][3] + " │ " + tab[1][4] + " │ "
+					+ tab[1][5] + " │ " + tab[1][6] + " │");
+			System.out.println("├───┼───┼───┼───┼───┼───┤");
+			System.out.println("│ " + tab[2][1] + " │ " + tab[2][2] + " │ " + tab[2][3] + " │ " + tab[2][4] + " │ "
+					+ tab[2][5] + " │ " + tab[2][6] + " │");
+			System.out.println("├───┼───┼───┼───┼───┼───┤");
+			System.out.println("│ " + tab[3][1] + " │ " + tab[3][2] + " │ " + tab[3][3] + " │ " + tab[3][4] + " │ "
+					+ tab[3][5] + " │ " + tab[3][6] + " │");
+			System.out.println("├───┼───┼───┼───┼───┼───┤");
+			System.out.println("│ " + tab[4][1] + " │ " + tab[4][2] + " │ " + tab[4][3] + " │ " + tab[4][4] + " │ "
+					+ tab[4][5] + " │ " + tab[4][6] + " │");
+			System.out.println("├───┼───┼───┼───┼───┼───┤");
+			System.out.println("│ " + tab[5][1] + " │ " + tab[5][2] + " │ " + tab[5][3] + " │ " + tab[5][4] + " │ "
+					+ tab[5][5] + " │ " + tab[5][6] + " │");
+			System.out.println("├───┼───┼───┼───┼───┼───┤");
+			System.out.println("│ " + tab[6][1] + " │ " + tab[6][2] + " │ " + tab[6][3] + " │ " + tab[6][4] + " │ "
+					+ tab[6][5] + " │ " + tab[6][6] + " │");
+			System.out.println("└───┴───┴───┴───┴───┴───┘");
+
+			/*
+			 * for (int i = 1; i < tab.length - 1; i++) { // FILA System.out.print(" "); for
+			 * (int j = 1; j < tab[0].length - 1; j++) { // COLUMNA System.out.print("|" +
+			 * tab[i][j] + "|"); } System.out.println(); }
+			 */
 			System.out.println();
+			System.out.println(
+					"Nivel de juego: " + nlvl + " (" + niv * 3 + " golpes)" + " \t \t Puntuacion en nivel: " + punt);
+			System.out.print("Golpes realizados: " + (int) golp + "\t \t \t \t Golpe (fila columna): ");
 		}
-		System.out.println();
-		System.out.println(
-				"Nivel de juego: " + nlvl + " (" + niv * 3 + "golpes)" + " \t \t Puntuacion en nivel: " + punt);
-		System.out.print("Golpes realizados: " + golp + "\t \t \t \t Golpe (fila columna): ");
+		flagtab = false;
 	}
 
+	
+	/*
+	 * @name niveles
+	 * Metodo que va a dar a elegir entre los niveles disponibles, dando como resultado el nivel elegido y un mensaje correspondiente a cada nivel
+	 * @param tab[][]
+	 * return niv
+	 */
 	public static int niveles(int tab[][]) {
 
 		int opc = 5;
@@ -104,7 +157,7 @@ public class juego {
 			try {
 				// TE DEJA ELEGIR EL NIVEL
 				System.out.println(" ");
-				System.out.println("�Que nivel desea?");
+				System.out.println("¿Que nivel desea?");
 				System.out.println("1.-NOVATO");
 				System.out.println("2.-SEMI-NOVATO");
 				System.out.println("3.-INTERMEDIO");
@@ -159,11 +212,18 @@ public class juego {
 		}
 
 		niv = opc;
-		tablero(niv, tab, flag);
+		tablero( tab, flag);
 		return niv;
 
 	}
 
+	/*
+	 * @name juegos
+	 * Metodo que va a ofrecer las diferentes opciones que hay en el juego:
+	 * salir, recomenzar, nuevo, calificación, cambiar de nivel y comprobar si se ha ganado la partida.
+	 * @param [][]tab, niv, m
+	 * @return golp
+	 */
 	public static int juegos(int[][] tab, int niv, int[][] m) {
 		Scanner t = new Scanner(System.in);
 		String aux;
@@ -188,26 +248,36 @@ public class juego {
 					System.out.println();
 				}
 
+				if((fil < -1 || fil>6) || (col < 2 || col>6) && col !=-2) {
+					System.out.println("Error");
+					System.out.println("El número de filas y columnas tiene que ser entre 1 y 6");
+					golp--;
+					
+					
+				}
 			} while ((fil < -1 || fil > 6) || (col < -2 || col > 6) || col == -1);
 			if (fil == 0 && col == 1) {
 				// RECOMENZAR
 				flag = true;
 				golp = 0;
-				tablero(niv, tab, flag);
+				punt = 0;
+				tablero(tab, flag);
 			}
 			if (fil == 0 && col == 2) {
 				// NUEVO
 				golp = 0;
-				tablero(niv, tab, flag);
+				punt = 0;
+				tablero(tab, flag);
 			}
 			if (fil == 0 && col == 3) {
 				// CALIFICACION
 				golp--;
-				puntuacion(contjugadas, fil, col);
+				calificacion(contjugadas, fil, col);
 			}
 			if (fil == 0 && col == 4) {
 				// CAMBIAR NIVEL
 				golp = 0;
+				punt = 0;
 				niveles(tab);
 			}
 
@@ -298,20 +368,21 @@ public class juego {
 						tab[fil + 1][col] = 2;
 					}
 				}
+				puntuacion(niv, fil, col);
 			}
 
 			// COMPROBAR SI GANO
 			int cont = 0;
-			int i = 0, j = 0;
-			for (i = 0; i < 6; i++) {
-				for (j = 0; j < 6; j++) {
+			int i = 1, j = 1;
+			for (i = 1; i < 7; i++) {
+				for (j = 1; j < 7; j++) {
 					if (tab[i][j] == 0) {
 						cont++;
 
 					}
 				}
 				if (cont == 36) {
-					puntuacion(contjugadas, fil, col);
+					mensaje(niv, golp);
 					cont = 0;
 					golp = 0;
 
@@ -324,11 +395,60 @@ public class juego {
 		if (golp == 0) {
 			punt = 0.5;
 		}
-		return golp;
+		return (int) golp;
 
 	}
 
+
+	/*
+	 * @name puntuacion
+	 * Metodo que obtendrá la puntuación segun el nivel, el numero de golpes y el golpe efectuado sobre el tablero
+	 * @param contpartidas, fil, col.
+	 * @return punt
+	 */
 	public static double puntuacion(int contpartidas, int fil, int col) {
+
+		int contadorjug = 0;
+		
+		while (golp > 0 && contadorjug == 0) {
+			// calculo de la puntuación de los niveles
+			// los golpes recomendados son el numero del nivel por 3
+			if (niv == 1) {
+				v[0] = 3 / golp;
+			} else if (niv == 2) {
+				v[1] = 6 / golp;
+			} else if (niv == 3) {
+				v[2] = 9 / golp;
+			} else if (niv == 4) {
+				v[3] = 12 / golp;
+			} else if (niv == 5) {
+				v[4] = 15 / golp;
+			} else if (niv == 6) {
+				v[5] = 18 / golp;
+			} else if (niv == 7) {
+				v[6] = 21 / golp;
+			} else if (niv == 8) {
+				v[7] = 24 / golp;
+			} else if (niv == 9) {
+				v[8] = 27 / golp;
+			}
+			contadorjug++;
+			
+			punt = v[niv]; 
+			
+		}
+		return punt;
+
+	}
+	
+	
+	/*
+	 * @name calificacion
+	 * Metodo que dará como resultado un fichero con la calificación obtenida
+	 * @param contpartidas, fil, col
+	 * @return punt  
+	 */
+	public static double calificacion(int contpartidas, int fil, int col) {
 		double calificacion = 0;
 		double aux = punt;
 
@@ -336,50 +456,33 @@ public class juego {
 		if (contpartidas == 1) {
 			calificacion = 1;
 		}
-		int contgolp = 0;
-		do {
 
-			// calculo de la puntuaci�n de los niveles
-			// los golpes recomendados son el numero del nivel por 3
-			if (niv == 1) {
-				calificacion = 3 / golp;
-			} else if (niv == 2) {
-				calificacion = 6 / golp;
-			} else if (niv == 3) {
-				calificacion = 9 / golp;
-			} else if (niv == 4) {
-				calificacion = 12 / golp;
-			} else if (niv == 5) {
-				calificacion = 15 / golp;
-			} else if (niv == 6) {
-				calificacion = 18 / golp;
-			} else if (niv == 7) {
-				calificacion = 21 / golp;
-			} else if (niv == 8) {
-				calificacion = 24 / golp;
-			} else if (niv == 9) {
-				calificacion = 27 / golp;
-			}
-			contgolp++;
-		} while (golp > 0 && contgolp == 1);
-
-		System.out.println(punt+ "puntuacion");
-
-		System.out.println(calificacion+ "calificacion");
 		// abandono juego
-		if (fil == 0 && col == -2 & golp == 0) {
+		if (fil == 0 && col == -2 && golp == 0) {
 			calificacion = 0.5;
 		}
-		if (fil == 0 && col == -2 & golp > 0) {
+		if (fil == 0 && col == -2 && golp > 0) {
 			calificacion = 1;
 		}
-
+		System.out.println("----------------");
+		System.out.println("Calificaciones: ");
+		System.out.println("----------------");
+		
+		System.out.println("Novato: " +v[0]);
+		System.out.println("Semi-Novato: "+v[1]);
+		System.out.println("Intermedio: "+v[2]);
+		System.out.println("Intermedio-Alto: " +v[3]);
+		System.out.println("Alto: " +v[4]);
+		System.out.println("Muy Alto: "+v[5]);
+		System.out.println("Experto: "+v[6]);
+		System.out.println("Semi-Dios: "+v[7]);
+		System.out.println("Dios: "+v[8]);
+		
 
 		if (punt > aux) {
 			File archivo = new File("archivo.txt");
 			BufferedWriter bw = null;
 
-			System.out.println(aux);
 			try {
 				if (archivo.exists()) {
 					// El fichero existe
@@ -406,19 +509,34 @@ public class juego {
 		return punt;
 	}
 
-	public static void mensaje(int niv, int golp) {
+	
+	/*
+	 * @name mensaje
+	 * Metodo que dara como resultado un mensaje dependiendo de la calidicación obtenida 
+	 * @param niv, golp
+	 * @return void
+	 */
+	public static void mensaje(int niv, double golp) {
 		int aux;
 
 		aux = niv * 3;
 
 		if (golp == aux) {
-			System.out.println("Perfecto. Hecho en " + golp + " golpes");
+			System.out.println(" ");
+			System.out.println("Perfecto. Hecho en " + (int) golp + " golpes");
 		} else {
 			if (golp < aux) {
-				System.out.println("Extraordinariamente bien. Hecho en " + golp + " golpes");
+				System.out.println(" ");
+				System.out.println("Extraordinariamente bien. Hecho en " + (int) golp + " golpes");
 			} else {
-				System.out.println("Hecho en " + golp + " golpes");
+				System.out.println(" ");
+				System.out.println("Hecho en " + (int) golp + " golpes");
 			}
 		}
+		int contpartidas = 0;
+		contpartidas++;
+		flagtab = true;
+		puntuacion(contpartidas, aux, (int) golp);
+
 	}
 }
