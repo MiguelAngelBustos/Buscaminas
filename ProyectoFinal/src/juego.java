@@ -1,3 +1,4 @@
+
 /**
  * Esta clase define los metodos con los que se trabajan en el juego ButtonMania
  * @author Luis Antonio Gilarte Lopez
@@ -23,6 +24,7 @@ public class juego {
 	protected static int m[][] = new int[8][8];
 	protected static boolean flag = false;
 	protected static int niv;
+	protected static double utl = 0;
 	protected static String nlvl = "Normal";
 	protected static Scanner t = new Scanner(System.in);
 	protected static boolean flagtab = false;
@@ -154,7 +156,7 @@ public class juego {
 	 * dando como resultado el nivel elegido y un mensaje correspondiente a cada
 	 * nivel
 	 * 
-	 * @param tab[][] 
+	 * @param tab[][]
 	 * 
 	 * return niv
 	 */
@@ -253,17 +255,18 @@ public class juego {
 
 					fil = Integer.parseInt(str.nextToken());
 					col = Integer.parseInt(str.nextToken());
-					
+
 				} catch (Exception e) {
 					System.out.println("Error.");
 					System.out.println("Introduce un numero valido");
 					System.out.println();
+
 				}
 
 				if ((fil < -1 || fil > 6) || (col < 1 || col > 6) && col != -2) {
 					System.out.println("Error");
 					System.out.println("El número de filas y columnas tiene que ser entre 1 y 6");
-					
+
 				}
 			} while ((fil < -1 || fil > 6) || (col < -2 || col > 6) || col == -1 || col == 0);
 			golp++;
@@ -273,8 +276,11 @@ public class juego {
 				golp = 0;
 				punt = 1;
 				tablero(tab);
-			}		
+			}
 			if (fil == 0 && col == 2) {
+				if ((v[niv - 1] * 3) < golp) {
+					v[niv - 1] = 0.5;
+				}
 				// NUEVO
 				golp = 0;
 				punt = 1;
@@ -287,6 +293,9 @@ public class juego {
 			}
 			if (fil == 0 && col == 4) {
 				// CAMBIAR NIVEL
+				if ((v[niv - 1] * 3) < golp) {
+					v[niv - 1] = 0.5;
+				}
 				golp = 0;
 				punt = 1;
 				niveles(tab);
@@ -404,10 +413,10 @@ public class juego {
 		} while (fil != 0 || col != -2);
 		System.out.println("Gracias por jugar :D");
 		if (golp == 0) {
-			v[niv-1] = 1;
+			v[niv - 1] = 1;
 		}
 		if (golp > 0) {
-			v[niv-1] = 0.5;
+			v[niv - 1] = 0.5;
 		}
 		return (int) golp;
 
@@ -424,7 +433,7 @@ public class juego {
 	public static double puntuacion() {
 		// calculo de la puntuación de los niveles
 		// los golpes recomendados son el numero del nivel por 3
-		
+
 		v[(niv - 1)] = (3 * niv) / golp;
 
 		punt = v[niv - 1];
@@ -444,9 +453,8 @@ public class juego {
 	 * @return punt
 	 */
 	public static double calificacion() {
-		double calificacion = 0;
 		double aux = 1;
-		
+		int cont = 0;
 
 		// abandono juego
 		System.out.println("----------------");
@@ -463,24 +471,30 @@ public class juego {
 		System.out.println("Semi-Dios: " + v[7]);
 		System.out.println("Dios: " + v[8]);
 
-		
-		for(int i=0;i< v.length;i++) {
-			aux = aux*v[i];	
+		for (int i = 0; i < v.length; i++) {
+			aux = aux * v[i];
 		}
-	
+
+		if (cont >= 0) {
+			if (utl > aux) {
+				aux = utl;
+			}
+		}
 		File archivo = new File("archivo.txt");
 		BufferedWriter bw = null;
-	
+
 		try {
 			if (archivo.exists()) {
 				// El fichero existe
 				bw = new BufferedWriter(new FileWriter("archivo.txt"));
 				bw.write("Tu puntuacion maxima es: " + aux);
+
 			} else {
 				// El fichero no existe y hay que crearlo
 				bw = new BufferedWriter(new FileWriter("archivo.txt"));
 				bw.write("Tu puntuacion maxima es: " + aux);
 			}
+			cont++;
 		} catch (IOException e) {
 			e.printStackTrace();
 		} finally {
@@ -490,6 +504,7 @@ public class juego {
 				e1.printStackTrace();
 			}
 		}
+		utl = aux;
 		return punt;
 	}
 
