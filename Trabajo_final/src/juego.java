@@ -110,7 +110,7 @@ public class juego {
 		System.out.println("");
 		if (flagtab == false) {
 
-			System.out.println("┌───┬───┬───┬───┬───┬───┐");
+			/*System.out.println("┌───┬───┬───┬───┬───┬───┐");
 			System.out.println("│ " + tab[1][1] + " │ " + tab[1][2] + " │ " + tab[1][3] + " │ " + tab[1][4] + " │ "
 					+ tab[1][5] + " │ " + tab[1][6] + " │");
 			System.out.println("├───┼───┼───┼───┼───┼───┤");
@@ -128,8 +128,7 @@ public class juego {
 			System.out.println("├───┼───┼───┼───┼───┼───┤");
 			System.out.println("│ " + tab[6][1] + " │ " + tab[6][2] + " │ " + tab[6][3] + " │ " + tab[6][4] + " │ "
 					+ tab[6][5] + " │ " + tab[6][6] + " │");
-			System.out.println("└───┴───┴───┴───┴───┴───┘");
-
+			System.out.println("└───┴───┴───┴───┴───┴───┘");*/
 			/*
 			 * for (int i = 1; i < tab.length - 1; i++) { // FILA System.out.print(" "); for
 			 * (int j = 1; j < tab[0].length - 1; j++) { // COLUMNA System.out.print("|" +
@@ -172,6 +171,7 @@ public class juego {
 				opc = t.nextInt();
 			} catch (Exception e) {
 				System.out.println("ERROR AL ELEGIR EL NIVEL");
+				t.next();
 			}
 		} while (opc < 1 || opc > 9);
 		switch (opc) {
