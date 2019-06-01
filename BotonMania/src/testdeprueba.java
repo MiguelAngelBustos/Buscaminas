@@ -14,7 +14,7 @@ import java.io.IOException;
 import java.util.Scanner;
 import java.util.StringTokenizer;
 
-public class juego {
+public class testdeprueba {
 	protected static int mov = 0;
 	protected static double punt = 1;
 	protected static int fil;
@@ -47,59 +47,16 @@ public class juego {
 		int fil = 0;
 		int col = 0;
 
-		if (flag == false) {
-
-			for (i = 1; i < tab.length - 1; i++) { // FILA
-				for (j = 1; j < tab[0].length - 1; j++) {
-					// COLUMNA
-					tab[i][j] = 0;
-				}
-			}
-
-			// GENERA LAS POSICIONES RANDOM
-			for (int z = 0; z < aux; z++) {
-
-				do {
-					fil = (int) (Math.random() * 7);
-					col = (int) (Math.random() * 7);
-					// System.out.println(fil);
-					// System.out.println(col);
-				} while (col == 0 || fil == 0);
-
-				// POSICIONES DE ARRIBA ABAJO IZQUIERDA Y DERECHA
-				tab[fil][col] = tab[fil][col] + 1;
-				tab[fil + 1][col] = tab[fil + 1][col] + 1;
-				tab[fil][col + 1] = tab[fil][col + 1] + 1;
-				tab[fil][col - 1] = tab[fil][col - 1] + 1;
-				tab[fil - 1][col] = tab[fil - 1][col] + 1;
-
-				// CAMBIAR LOS NUMEROS QUE SEAN IGUAL A CUATRO EN CEROS
-				for (i = 1; i < tab.length - 1; i++) {
-					for (j = 1; j < tab[0].length - 1; j++) {
-						if (tab[i][j] == 4) {
-							tab[i][j] = 0;
-
-						}
-
-						// GUARDA TAB EN UNA MATRIZ M
-						m[i][j] = tab[i][j];
-					}
-				}
-			}
-			System.out.println();
-
-		} else {
-
-			// SOBREESCRIBIR LA MATRIZ TAB PARA RECOMENZAR
-			for (i = 1; i < tab.length - 1; i++) {
-				for (j = 1; j < tab[0].length - 1; j++) {
-					tab[i][j] = m[i][j];
-				}
-			}
-		}
+		tab[2][2]=1;    tab[5][5]= 1;    tab[4][4]= 1;            
+		tab[1][2]=1;	tab[5][6]= 1;    tab[4][3]= 1;
+		tab[2][1]=1;    tab[5][4]= 2;    tab[3][4]= 1; 
+		tab[3][2]=1;    tab[4][5]= 2;
+		tab[2][3]=1;    tab[6][5]= 1;
+		
+		
 		return tab;
 	}
-
+           
 	/*
 	 * @name juegaTablero
 	 * 
@@ -562,5 +519,23 @@ public class juego {
 			}
 		}
 		flagtab = true;
+	}
+	/*
+	 * 
+	 */
+	public static void main(String[] args) {
+		int[][] tab = new int[8][8];
+		niv = 5;
+
+		
+		
+		for (int x = 0; x > vb.length; x++) {
+			vb[x] = false;
+		}
+
+		tablero(tab);
+		juegos(tab);
+		puntuacion();
+		mensaje();
 	}
 }
