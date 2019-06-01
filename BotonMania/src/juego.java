@@ -1,3 +1,4 @@
+
 /**
  * Esta clase define los metodos con los que se trabajan en el juego ButtonMania
  * @author Luis Antonio Gilarte Lopez
@@ -23,6 +24,7 @@ public class juego {
 	protected static int m[][] = new int[8][8];
 	protected static boolean flag = false;
 	protected static int niv;
+	protected static double utl = 0;
 	protected static String nlvl = "Normal";
 	protected static Scanner t = new Scanner(System.in);
 	protected static boolean flagtab = false;
@@ -33,7 +35,9 @@ public class juego {
 	 * 
 	 * @description: Metodo tablero genera el tablero dependiendo del nivel
 	 * 
-	 * @param tab[][], flag return tab
+	 * @param tab[][]
+	 * 
+	 * return tab
 	 */
 	public static int[][] tablero(int tab[][]) {
 		int aux = 0, i = 0, j = 0;
@@ -100,7 +104,9 @@ public class juego {
 	 * 
 	 * @description: Metodo que va a pintar el tablero
 	 * 
-	 * @param tab[][], punt return void
+	 * @param tab[][]
+	 * 
+	 * return void
 	 */
 	public static void JuegaTablero(int tab[][]) {
 
@@ -150,7 +156,9 @@ public class juego {
 	 * dando como resultado el nivel elegido y un mensaje correspondiente a cada
 	 * nivel
 	 * 
-	 * @param tab[][] return niv
+	 * @param tab[][]
+	 * 
+	 * return niv
 	 */
 	public static int niveles(int tab[][]) {
 
@@ -168,10 +176,11 @@ public class juego {
 				System.out.println("6.-Hard");
 				System.out.println("7.-Real Hard");
 				System.out.println("8.-Master");
-				System.out.println("9.-Imposible");
+				System.out.println("9.-Impossible");
 				opc = t.nextInt();
 			} catch (Exception e) {
 				System.out.println("ERROR AL ELEGIR EL NIVEL");
+				t.next();
 			}
 		} while (opc < 1 || opc > 9);
 		switch (opc) {
@@ -208,7 +217,7 @@ public class juego {
 			System.out.println("Has elegido el nivel " + nlvl);
 			break;
 		case 9:
-			nlvl = "Imposible";
+			nlvl = "Impossible";
 			System.out.println("Has elegido el nivel " + nlvl);
 			break;
 		}
@@ -226,13 +235,13 @@ public class juego {
 	 * juego: salir, recomenzar, nuevo, calificación, cambiar de nivel y comprobar
 	 * si se ha ganado la partida.
 	 * 
-	 * @param [][]tab, niv, m
+	 * @param [][]tab
 	 * 
 	 * @return golp
 	 */
 	public static int juegos(int[][] tab) {
 		Scanner t = new Scanner(System.in);
-		String aux;
+		String aux=null;
 		StringTokenizer str;
 		// SALIR AL PONER EL 0 -2
 		do {
@@ -247,19 +256,25 @@ public class juego {
 
 					fil = Integer.parseInt(str.nextToken());
 					col = Integer.parseInt(str.nextToken());
-					
+
 				} catch (Exception e) {
-					System.out.println("Error.");
-					System.out.println("Introduce un numero valido");
+					fil=8;
+					col=8;
 					System.out.println();
+
+				}
+				if(aux.length()>3 && col!=-2){
+					
+					fil=9;
+					col=9;
 				}
 
 				if ((fil < -1 || fil > 6) || (col < 1 || col > 6) && col != -2) {
 					System.out.println("Error");
 					System.out.println("El número de filas y columnas tiene que ser entre 1 y 6");
-					
+
 				}
-			} while ((fil < -1 || fil > 6) || (col < -2 || col > 6) || col == -1);
+			} while ((fil < -1 || fil > 6) || (col < -2 || col > 6) || col == -1 || col == 0);
 			golp++;
 			if (fil == 0 && col == 1) {
 				// RECOMENZAR
@@ -270,6 +285,9 @@ public class juego {
 			}
 			if (fil == 0 && col == 2) {
 				// NUEVO
+				if (niv * 3 > golp) {
+					v[niv - 1] = 0.5;
+				}
 				golp = 0;
 				punt = 1;
 				tablero(tab);
@@ -281,6 +299,9 @@ public class juego {
 			}
 			if (fil == 0 && col == 4) {
 				// CAMBIAR NIVEL
+				if (niv * 3 > golp) {
+					v[niv - 1] = 0.5;
+				}
 				golp = 0;
 				punt = 1;
 				niveles(tab);
@@ -398,7 +419,10 @@ public class juego {
 		} while (fil != 0 || col != -2);
 		System.out.println("Gracias por jugar :D");
 		if (golp == 0) {
-			punt = 0.5;
+			v[niv - 1] = 1;
+		}
+		if (golp > 0) {
+			v[niv - 1] = 0.5;
 		}
 		return (int) golp;
 
@@ -410,14 +434,12 @@ public class juego {
 	 * @description: Metodo que obtendrá la puntuación segun el nivel, el numero de
 	 * golpes y el golpe efectuado sobre el tablero
 	 * 
-	 * @param contpartidas, fil, col.
+	 * @param
 	 */
 	public static double puntuacion() {
-		// System.out.println("Vector: " + v[(niv-1)]);
-		// System.out.println("Golpes: " + golp);
-
 		// calculo de la puntuación de los niveles
 		// los golpes recomendados son el numero del nivel por 3
+
 		v[(niv - 1)] = (3 * niv) / golp;
 
 		punt = v[niv - 1];
@@ -432,52 +454,55 @@ public class juego {
 	 * @description: Metodo que dará como resultado un fichero con la calificación
 	 * obtenida
 	 * 
-	 * @param contpartidas, fil, col
+	 * @param
 	 * 
 	 * @return punt
 	 */
 	public static double calificacion() {
-		double calificacion = 0;
 		double aux = 1;
+		int cont = 0;
 
 		// abandono juego
-		if (fil == 0 && col == -2 && golp == 0) {
-			calificacion = 0.5;
-		}
-		if (fil == 0 && col == -2 && golp > 0) {
-			calificacion = 1;
-		}
 		System.out.println("----------------");
 		System.out.println("Calificaciones: ");
 		System.out.println("----------------");
 
-		System.out.println("Novato: " + (int) v[0]);
-		System.out.println("Semi-Novato: " + (int) v[1]);
-		System.out.println("Intermedio: " + (int) v[2]);
-		System.out.println("Intermedio-Alto: " + (int) v[3]);
-		System.out.println("Alto: " + (int) v[4]);
-		System.out.println("Muy Alto: " + (int) v[5]);
-		System.out.println("Experto: " + (int) v[6]);
-		System.out.println("Semi-Dios: " + (int) v[7]);
-		System.out.println("Dios: " + (int) v[8]);
+		System.out.println("Huh, what?: " + v[0]);
+		System.out.println("Dumb: " + v[1]);
+		System.out.println("Real Easy: " + v[2]);
+		System.out.println("Easy: " + v[3]);
+		System.out.println("Normal: " + v[4]);
+		System.out.println("Hard: " + v[5]);
+		System.out.println("Real Hard: " + v[6]);
+		System.out.println("Master: " + v[7]);
+		System.out.println("Impossible: " + v[8]);
 
-		for(int i=0;i< v.length;i++) {
-			aux = aux*v[i];
+		for (int i = 0; i < v.length; i++) {
+			aux = aux * v[i];
 		}
 		
+		
+
+		if (cont >= 0) {
+			if (utl > aux) {
+				aux = utl;
+			}
+		}
 		File archivo = new File("archivo.txt");
 		BufferedWriter bw = null;
-	
+
 		try {
 			if (archivo.exists()) {
 				// El fichero existe
 				bw = new BufferedWriter(new FileWriter("archivo.txt"));
 				bw.write("Tu puntuacion maxima es: " + aux);
+
 			} else {
 				// El fichero no existe y hay que crearlo
 				bw = new BufferedWriter(new FileWriter("archivo.txt"));
 				bw.write("Tu puntuacion maxima es: " + aux);
 			}
+			cont++;
 		} catch (IOException e) {
 			e.printStackTrace();
 		} finally {
@@ -487,6 +512,7 @@ public class juego {
 				e1.printStackTrace();
 			}
 		}
+		utl = aux;
 		return punt;
 	}
 
@@ -496,7 +522,7 @@ public class juego {
 	 * @description: Metodo que dara como resultado un mensaje dependiendo de la
 	 * calidicación obtenida
 	 * 
-	 * @param niv, golp
+	 * @param
 	 * 
 	 * @return void
 	 */
