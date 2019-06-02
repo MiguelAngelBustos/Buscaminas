@@ -1,10 +1,10 @@
 
 /**
  * Esta clase define los metodos con los que se trabajan en el juego ButtonMania
- * @author Luis Antonio Gilarte Lopez
- * @author Miguel Angel Bustos Simon
- * @author Jorge Garcia Castilla
- * @author Adrian Ramos Robles 
+ * @author Gilarte Lopez Luis Antonio
+ * @author Bustos Simon Miguel Angel
+ * @author Garcia Castilla Jorge 
+ * @author Ramos Robles Adrian
  */
 
 import java.io.BufferedWriter;
